@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timesheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+        
+        main {
+            padding: 2em;
+        }
+        
+        form {
+            margin-bottom: 2em;
+        }
+        
+        form div {
+            margin-bottom: 1em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1em;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Timesheet</h1>
+    </header>
+    <main>
+        <form id="timesheet-form">
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div>
+                <label for="hours">Hours Worked:</label>
+                <input type="number" id="hours" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Hours Worked</th>
+                </tr>
+            </thead>
+            <tbody id="timesheet-body">
+                <!-- Timesheet entries will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </main>
+    <script>
+        document.getElementById('timesheet-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const date = document.getElementById('date').value;
+            const hours = document.getElementById('hours').value;
+            
+            const timesheetBody = document.getElementById('timesheet-body');
+            
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${date}</td>
+                <td>${hours}</td>
+            `;
+            
+            timesheetBody.appendChild(newRow);
+            
+            document.getElementById('timesheet-form').reset();
+        });
+    </script>
+</body>
+</html>
